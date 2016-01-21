@@ -76,7 +76,7 @@ Meteor.methods({
         var trackResponse = apiWrap(spotifyApi.getTrack)(trackId, {});
 
         var track = trackResponse.data.body;
-        track.score=0;
+        track.score = 0;
         Suggestions.insert(track);
     }
 });
