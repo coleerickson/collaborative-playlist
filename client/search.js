@@ -1,4 +1,4 @@
-Template.body.events({
+Template.search.events({
     'click #search-button': function(event) {
         // get query
         var query = $("#search-box").val();
@@ -29,7 +29,7 @@ Template.body.events({
     }
 });
 
-Template.body.helpers({
+Template.search.helpers({
     suggestions: function () {
         return Suggestions.find({});
     },

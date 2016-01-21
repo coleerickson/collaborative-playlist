@@ -1,5 +1,5 @@
 * {
-    color: #eee;
+    color: #eee!important;
     font-family: sans-serif;
 }
 
@@ -46,4 +46,8 @@ button {
 
 .search-result:hover {
     background-color: #777;
+}
+
+.navbar-default {
+  background-color: purple;
 }

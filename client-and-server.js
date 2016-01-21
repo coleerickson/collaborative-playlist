@@ -1,5 +1,20 @@
 Suggestions = new Mongo.Collection("suggestions");
 
+Router.route('/', function () {
+  this.render('homePage');
+  this.layout('layout');
+});
+
+Router.route('/search', function () {
+  this.render('search');
+  this.layout('layout');
+});
+
+Router.route('/songQueue', function () {
+  this.render('songQueue');
+  this.layout('layout');
+});
+
 if (Meteor.isServer) {
     Meteor.publish("suggestions",
         function () {

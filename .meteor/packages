@@ -20,3 +20,5 @@ xinranxiao:spotify-web-api
 xinranxiao:accounts-spotify
 accounts-ui
 service-configuration
+twbs:bootstrap
+iron:router
