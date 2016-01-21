@@ -12,47 +12,55 @@ if (Meteor.isClient) {
     Meteor.subscribe("suggestions");
 }
 
+// Wraps a Spotify API function. If the function call fails, this function
+// will try to retrieve a new access token if appropriate and then retry the
+// API call.
+function apiWrap(f) {
+    var wrapped = function(/* arguments */) {
+        var response = f.apply(null, arguments);
+        if (response.error) {
+            // if we need to refresh the access token, do so and then try again
+            if (response.error.statusCode === 401) {
+                console.log("API call failed because we need a new access token. Refreshing token...");
+                // refresh token
+                api.refreshAndUpdateAccessToken();
+
+                // recursive retry
+                return wrapped.apply(null, arguments);
+            } else {
+                // unknown error
+                console.log("Failed.");
+                Meteor.Error("spotify-api-failure", "Error calling Spotify API method", response.error);
+            }
+        } else {
+            return response;
+        }
+    }
+    return wrapped;
+}
+
 Meteor.methods({
     search: function(query) {
         var response = {};
 
         var spotifyApi = new SpotifyWebApi();
 
-        var tracksResponse = spotifyApi.searchTracks(query, {limit: 5});
-        if (tracksResponse.error) {
-            console.error(tracksResponse.error);
-        } else {
-            response.tracks = tracksResponse.data.body.tracks.items;
-        }
+        var tracksResponse = apiWrap(spotifyApi.searchTracks)(query, {limit: 5});
+        response.tracks = tracksResponse.data.body.tracks.items;
 
-        var albumsResponse = spotifyApi.searchAlbums(query, {limit: 5});
-        if (albumsResponse.error) {
-            console.error(albumsResponse.error);
-        } else {
-            response.albums = albumsResponse.data.body.albums.items;
-        }
+        var albumsResponse = apiWrap(spotifyApi.searchAlbums)(query, {limit: 5});
+        response.albums = albumsResponse.data.body.albums.items;
 
-        var artistsResponse = spotifyApi.searchArtists(query, {limit: 5});
-        if (artistsResponse.error) {
-            console.error(artistsResponse.error);
-        } else {
-            response.artists = artistsResponse.data.body.artists.items;
-        }
+        var artistsResponse = apiWrap(spotifyApi.searchArtists)(query, {limit: 5});
+        response.artists = artistsResponse.data.body.artists.items;
 
         return response;
     },
     suggest: function (trackId) {
         var spotifyApi = new SpotifyWebApi();
-        var trackResponse = spotifyApi.getTrack(trackId, {});
+        var trackResponse = apiWrap(spotifyApi.getTrack)(trackId, {});
 
-        console.log("track response:");
-        console.log(trackResponse);
-
-        if (trackResponse.error) {
-            console.error(trackResponse.error);
-        } else {
-            var track = trackResponse.data.body;
-            Suggestions.insert(track);
-        }
+        var track = trackResponse.data.body;
+        Suggestions.insert(track);
     }
 });
