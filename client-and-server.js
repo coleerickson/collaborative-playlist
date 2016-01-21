@@ -41,7 +41,18 @@ Meteor.methods({
 
         return response;
     },
-    suggest: function (uri) {
-        Suggestions.insert({uri: uri});
+    suggest: function (trackId) {
+        var spotifyApi = new SpotifyWebApi();
+        var trackResponse = spotifyApi.getTrack(trackId, {});
+
+        console.log("track response:");
+        console.log(trackResponse);
+
+        if (trackResponse.error) {
+            console.error(trackResponse.error);
+        } else {
+            var track = trackResponse.data.body;
+            Suggestions.insert(track);
+        }
     }
 });

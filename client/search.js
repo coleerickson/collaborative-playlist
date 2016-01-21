@@ -24,7 +24,7 @@ Template.body.events({
     },
     'click .track': function(event) {
         Session.set("spotifyUri", this.uri);
-        Meteor.call('suggest', this.uri);
+        Meteor.call('suggest', this.id);
         console.log(this);
     }
 });
