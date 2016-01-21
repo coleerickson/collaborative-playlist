@@ -79,3 +79,9 @@ Template.track.helpers({
         return this.album.name;
     }
 });
+
+Template.songQueue.helpers({
+      suggestions: function () {
+          return Suggestions.find({});
+      }
+});
