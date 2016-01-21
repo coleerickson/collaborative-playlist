@@ -80,5 +80,16 @@ Meteor.methods({
         Suggestions.insert(track);
 
         // apiWrap(spotifyApi.createPlaylist)(Meteor.user().services.spotify.id, "Meteor Playlist", {public: false});
+    },
+    upVote: function (id) {
+      Suggestions.update(id, {
+        $inc: {score: 1}
+      })
+    },
+
+    downVote: function(id) {
+      Suggestions.update(id, {
+        $inc: {score: -1}
+      });
     }
 });

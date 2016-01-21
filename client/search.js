@@ -82,7 +82,7 @@ Template.track.helpers({
 
 Template.songQueue.helpers({
       suggestions: function () {
-          return Suggestions.find({});
+          return Suggestions.find({}, {sort: {score: -1}}) || {};
       },
 
       artist: function() {
@@ -93,4 +93,14 @@ Template.songQueue.helpers({
       album: function() {
           return this.album.name;
       }
+});
+
+Template.suggestion.events({
+  "click .like":function () {
+      Meteor.call("upVote", this._id);
+    },
+
+    "click .dislike":function () {
+        Meteor.call("downVote", this._id);
+      },
 });
