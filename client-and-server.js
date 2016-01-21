@@ -44,7 +44,7 @@ function apiWrap(f) {
                 return wrapped.apply(null, arguments);
             } else {
                 // unknown error
-                console.log("Failed.");
+                console.error("Failed. " + response.error);
                 Meteor.Error("spotify-api-failure", "Error calling Spotify API method", response.error);
             }
         } else {
@@ -78,5 +78,7 @@ Meteor.methods({
         var track = trackResponse.data.body;
         track.score = 0;
         Suggestions.insert(track);
+
+        // apiWrap(spotifyApi.createPlaylist)(Meteor.user().services.spotify.id, "Meteor Playlist", {public: false});
     }
 });
