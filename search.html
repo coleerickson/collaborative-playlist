@@ -1,0 +1,42 @@
+<head>
+    <title>collaborative-playlist</title>
+</head>
+
+<body>
+    {{> loginButtons}}
+
+    {{#if spotifyUri}}
+        <div id="spotify-play-button">
+            <iframe src="https://embed.spotify.com/?uri={{spotifyUri}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+        </div>
+    {{/if}}
+
+    <h2>Search</h2>
+    <input id="search-box" type="text" />
+    <button id="search-button">Search</button>
+
+    <h2>Tracks</h2>
+    {{#each tracks}}
+        {{> track}}
+    {{/each}}
+
+    <h2>Artists</h2>
+    {{#each artists}}
+        {{> artist}}
+    {{/each}}
+</body>
+
+<template name="track">
+    <!-- available templates: name -->
+    <div class="track search-result">
+        <div class="track-title">{{name}}</div>
+        <div class="track-details">
+            <span class="track-artist">{{artist}}</span> <span class="track-album">- {{album}}</span>
+        </div>
+    </div>
+</template>
+
+<template name="artist">
+    <!-- available templates: name -->
+    <div class="artist search-result"><img src='{{image}}' height='64' width='64'/>{{name}}</div>
+</template>
