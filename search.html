@@ -15,16 +15,17 @@
 
 <template name="songQueue">
     <h2>Suggestions</h2>
-    <div class="container">
+    <div class=container>
         {{#each suggestions}}
-            <div class="row">
-                <div class="col-lg-3"> <strong> {{name}} </strong> </div>
-                <div class="col-sm-1"> <button class="like"> Like </button> </div>
-                <div class="col-md-1"> <strong> {{score}} </strong> </div>
-                <div class="col-md-1"> <button class="dislike"> Dislike </button> </div>
+            <div class=row>
+                <div class=col-lg-3> <strong> {{name}} </strong> </div>
+                <div class=col-lg-3> <strong> {{artist}} </strong> </div>
+                <div class=col-sm-1> <button class="like"> Like </button> </div>
+                <div class=col-md-1> <strong> {{score}} </strong> </div>
+                <div class=col-md-1> <button class="dislike"> Dislike </button> </div>
             </div>
         {{/each}}
-   </div>
+    </div>
 </template>
 
 <template name="search">

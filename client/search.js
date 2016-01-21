@@ -83,5 +83,14 @@ Template.track.helpers({
 Template.songQueue.helpers({
       suggestions: function () {
           return Suggestions.find({});
+      },
+
+      artist: function() {
+          return this.artists.map(function (artist) {
+              return artist.name
+          }).join(', ');
+      },
+      album: function() {
+          return this.album.name;
       }
 });
