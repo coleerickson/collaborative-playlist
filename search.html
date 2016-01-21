@@ -14,7 +14,17 @@
 </template>
 
 <template name="songQueue">
-  <p> This is the song sorting page. </p>
+  <h2>Suggestions</h2>
+    <div class=container>
+   {{#each suggestions}}
+     <div class=row>
+       <div class=col-lg-3> <strong> {{name}} </strong> </div>
+        <div class=col-sm-1> <button class="like"> Like </button> </div>
+         <div class=col-md-1> <strong> {{score}} </strong> </div>
+          <div class=col-md-1> <button class="dislike"> Dislike </button> </div>
+        </div>
+     {{/each}}
+   </div>
 </template>
 
 <template name="search">
@@ -31,11 +41,22 @@
     <h2>Search</h2>
     <input id="search-box" type="text" />
     <button id="search-button">Search</button>
-
+<!--
     <h2>Suggestions</h2>
     {{#each suggestions}}
-        <p>uri: {{uri}}, name: {{name}}</p>
+    <div class=container>
+   {{#each suggestions}}
+     <div class=row>
+       <div class=col-md-1> <strong> {{name}} </strong> </div>
+        <div class=col-md-1> <button class="like"> Like </button> </div>
+         <div class=col-md-1> <strong> {{score}} </strong> </div>
+          <div class=col-md-1> <button class="dislike"> Dislike </button> </div>
+        </div>
+     {{/each}}
+   </div>
     {{/each}}
+
+  -->
 
 
     <h2>Tracks</h2>
