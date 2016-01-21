@@ -11,9 +11,16 @@
         </div>
     {{/if}}
 
+
     <h2>Search</h2>
     <input id="search-box" type="text" />
     <button id="search-button">Search</button>
+
+    <h2>Suggestions</h2>
+    {{#each suggestions}}
+        <p>uri: {{uri}}</p>
+    {{/each}}
+
 
     <h2>Tracks</h2>
     {{#each tracks}}

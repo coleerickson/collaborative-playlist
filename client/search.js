@@ -24,11 +24,16 @@ Template.body.events({
     },
     'click .track': function(event) {
         Session.set("spotifyUri", this.uri);
+        Meteor.call('suggest', this.uri);
         console.log(this);
     }
 });
 
 Template.body.helpers({
+    suggestions: function () {
+        return Suggestions.find({});
+    },
+
     artists: function() {
         var results = Session.get("searchResults");
         console.log(results);

@@ -1,3 +1,17 @@
+Suggestions = new Mongo.Collection("suggestions");
+
+if (Meteor.isServer) {
+    Meteor.publish("suggestions",
+        function () {
+            return Suggestions.find();
+        }
+    );
+}
+
+if (Meteor.isClient) {
+    Meteor.subscribe("suggestions");
+}
+
 Meteor.methods({
     search: function(query) {
         var response = {};
@@ -26,5 +40,8 @@ Meteor.methods({
         }
 
         return response;
+    },
+    suggest: function (uri) {
+        Suggestions.insert({uri: uri});
     }
 });
