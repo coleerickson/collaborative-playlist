@@ -78,5 +78,16 @@ Meteor.methods({
         var track = trackResponse.data.body;
         track.score=0;
         Suggestions.insert(track);
+    },
+    upVote: function (id) {
+      Suggestions.update(id, {
+        $inc: {score: 1}
+      })
+    },
+
+    downVote: function(id) {
+      Suggestions.update(id, {
+        $inc: {score: -1}
+      });
     }
 });
