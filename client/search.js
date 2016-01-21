@@ -73,7 +73,7 @@ Template.track.helpers({
     artist: function() {
         return this.artists.map(function (artist) {
             return artist.name
-        }).join();
+        }).join(', ');
     },
     album: function() {
         return this.album.name;
