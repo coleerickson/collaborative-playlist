@@ -1,3 +1,13 @@
+Template.navBar.helpers({
+    activeFor: function (other) {
+        if (Router.current().route.path() === other) {
+            return "active";
+        } else {
+            return "";
+        }
+    }
+});
+
 Template.search.events({
     'click #search-button': function(event) {
         // get query
