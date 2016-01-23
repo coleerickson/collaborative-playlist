@@ -14,12 +14,14 @@
 </template>
 
 <template name="songQueue">
-    <h2>Suggestions</h2>
-    <div class=container>
-   {{#each suggestions}}
-      {{>suggestion}}
-     {{/each}}
-   </div>
+    <body>
+        <h2>Suggestions</h2>
+        <div class=container>
+            {{#each suggestions}}
+                {{> trackSuggestion}}
+            {{/each}}
+        </div>
+    </body>
 </template>
 
 <template name="suggestion">
@@ -49,7 +51,7 @@
 
     <h2>Tracks</h2>
     {{#each tracks}}
-        {{> track}}
+        {{> trackSearchResult}}
     {{/each}}
 
     <h2>Artists</h2>
@@ -59,17 +61,32 @@
 </body>
 </template>
 
-<template name="track">
-    <div class="track search-result">
-        <div class="track-title">{{name}}</div>
-        <div class="track-details">
-            <span class="track-artist">{{artist}}</span> <span class="track-album">- {{album}}</span>
+<template name="trackSuggestion">
+    <div class="track music-item suggestion">
+        <div class="votes">
+            <button class="up {{#if votedUp}}set{{/if}}"> <span class="glyphicon glyphicon-chevron-up"></span> </button>
+            <div class="score">{{score}}</div>
+            <button class="down {{#if votedDown}}set{{/if}}"> <span class="glyphicon glyphicon-chevron-down"></span> </button>
         </div>
+        {{> trackContents}}
+    </div>
+</template>
+
+<template name="trackSearchResult">
+    <div class="track music-item search-result">
+        {{> trackContents}}
+    </div>
+</template>
+
+<template name="trackContents">
+    <div class="track-title">{{name}}</div>
+    <div class="track-details">
+        <span class="track-artist">{{artist}}</span> <span class="track-album">- {{album}}</span>
     </div>
 </template>
 
 <template name="artist">
-    <div class="artist search-result"><img src='{{image}}' height='64' width='64'/>{{name}}</div>
+    <div class="artist music-item"><img src='{{image}}' height='64' width='64'/>{{name}}</div>
 </template>
 
 <template name="navBar">

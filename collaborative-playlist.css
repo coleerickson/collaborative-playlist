@@ -33,21 +33,54 @@ button {
     color: #aaa;
 }
 
-.search-result:not(:first-child) {
+.music-item:not(:first-child) {
     margin-top: 10px;
 }
 
-.search-result {
+.music-item {
     background-color: #555;
     padding: 20px;
 
     text-overflow: ellipsis;
 }
 
-.search-result:hover {
+.music-item:hover {
     background-color: #777;
 }
 
 .navbar-default {
   background-color: purple;
+}
+
+.suggestion {
+    overflow: hidden;
+}
+
+.suggestion .votes {
+    float: left;
+    display: block;
+
+    text-align: center;
+
+    padding-right: 15px;
+}
+
+.suggestion .votes .up.set {
+  color: #0f0;
+}
+
+.suggestion .votes .up:hover {
+    color: #afa;
+}
+
+.suggestion .votes .down.set {
+  color: #f00;
+}
+
+.suggestion .votes .down:hover {
+  color: #faa;
+}
+
+.suggestion .track-contents {
+    overflow: hidden;
 }

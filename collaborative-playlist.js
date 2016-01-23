@@ -38,7 +38,8 @@ function apiWrap(f) {
             if (response.error.statusCode === 401) {
                 console.log("API call failed because we need a new access token. Refreshing token...");
                 // refresh token
-                api.refreshAndUpdateAccessToken();
+                var spotifyApi = new SpotifyWebApi();
+                spotifyApi.refreshAndUpdateAccessToken();
 
                 // recursive retry
                 return wrapped.apply(null, arguments);

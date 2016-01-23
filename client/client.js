@@ -69,7 +69,7 @@ Template.artist.helpers({
     }
 });
 
-Template.track.helpers({
+Template.trackContents.helpers({
     artist: function() {
         return this.artists.map(function (artist) {
             return artist.name
@@ -84,7 +84,6 @@ Template.songQueue.helpers({
       suggestions: function () {
           return Suggestions.find({}, {sort: {score: -1}}) || {};
       },
-
       artist: function() {
           return this.artists.map(function (artist) {
               return artist.name
@@ -95,12 +94,11 @@ Template.songQueue.helpers({
       }
 });
 
-Template.suggestion.events({
-  "click .like":function () {
-      Meteor.call("upVote", this._id);
+Template.trackSuggestion.events({
+    "click .like": function () {
+        Meteor.call("upVote", this._id);
     },
-
-    "click .dislike":function () {
+    "click .dislike": function () {
         Meteor.call("downVote", this._id);
-      },
+    }
 });
