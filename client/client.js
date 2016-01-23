@@ -95,10 +95,10 @@ Template.songQueue.helpers({
 });
 
 Template.trackSuggestion.events({
-    "click .like": function () {
+    "click .votes .up": function () {
         Meteor.call("upVote", this._id);
     },
-    "click .dislike": function () {
+    "click .votes .down": function () {
         Meteor.call("downVote", this._id);
     }
 });

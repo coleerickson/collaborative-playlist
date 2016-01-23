@@ -1,4 +1,5 @@
 Suggestions = new Mongo.Collection("suggestions");
+Votes = new Mongo.Collection("votes");
 
 Router.route('/', function () {
   this.render('homePage');
@@ -21,10 +22,16 @@ if (Meteor.isServer) {
             return Suggestions.find();
         }
     );
+    Meteor.publish("votes",
+        function () {
+            return Votes.find();
+        }
+    );
 }
 
 if (Meteor.isClient) {
     Meteor.subscribe("suggestions");
+    Meteor.subscribe("votes");
 }
 
 // Wraps a Spotify API function. If the function call fails, this function
@@ -77,20 +84,62 @@ Meteor.methods({
         var trackResponse = apiWrap(spotifyApi.getTrack)(trackId, {});
 
         var track = trackResponse.data.body;
-        track.score = 0;
         Suggestions.insert(track);
+
+        // TODO check for pre-existing suggestion
 
         // apiWrap(spotifyApi.createPlaylist)(Meteor.user().services.spotify.id, "Meteor Playlist", {public: false});
     },
+
     upVote: function (id) {
-      Suggestions.update(id, {
-        $inc: {score: 1}
-      })
+        var userId = Meteor.userId();
+        if (!userId) {
+            return;
+        }
+
+        Votes.upsert(
+            { suggestion: id, user: userId },
+            {
+                $set: {
+                    value: 1
+                }
+            }
+        );
+
+        var votes = Votes.find({ suggestion: id });
+        var sum = 0;
+        votes.forEach(function (vote) {
+            sum += vote.value;
+        });
+
+        Suggestions.update(id, {
+            $set: { score: sum }
+        });
     },
 
-    downVote: function(id) {
-      Suggestions.update(id, {
-        $inc: {score: -1}
-      });
+    downVote: function (id) {
+        var userId = Meteor.userId();
+        if (!userId) {
+            return;
+        }
+
+        Votes.upsert(
+            { suggestion: id, user: userId },
+            {
+                $set: {
+                    value: -1
+                }
+            }
+        );
+
+        var votes = Votes.find({ suggestion: id });
+        var sum = 0;
+        votes.forEach(function (vote) {
+            sum += vote.value;
+        });
+
+        Suggestions.update(id, {
+            $set: { score: sum }
+        });
     }
 });
