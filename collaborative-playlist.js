@@ -129,7 +129,7 @@ Meteor.methods({
                 $set: {
                     value: -1
                 }
-            }
+            },
         );
 
         var votes = Votes.find({ suggestion: id });
