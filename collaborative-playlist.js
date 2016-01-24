@@ -46,7 +46,15 @@ function apiWrap(f) {
                 console.log("API call failed because we need a new access token. Refreshing token...");
                 // refresh token
                 var spotifyApi = new SpotifyWebApi();
-                spotifyApi.refreshAndUpdateAccessToken();
+                spotifyApi.refreshAndUpdateAccessToken(function (err, response) {
+                    if (err) {
+                        console.log("failed to refresh");
+                        console.log(err);
+                    } else {
+                        console.log("succeeded refresh");
+                        console.log(response);
+                    }
+                });
 
                 // recursive retry
                 return wrapped.apply(null, arguments);
@@ -68,14 +76,8 @@ Meteor.methods({
 
         var spotifyApi = new SpotifyWebApi();
 
-        var tracksResponse = apiWrap(spotifyApi.searchTracks)(query, {limit: 5});
+        var tracksResponse = apiWrap(spotifyApi.searchTracks)(query, {limit: 7});
         response.tracks = tracksResponse.data.body.tracks.items;
-
-        var albumsResponse = apiWrap(spotifyApi.searchAlbums)(query, {limit: 5});
-        response.albums = albumsResponse.data.body.albums.items;
-
-        var artistsResponse = apiWrap(spotifyApi.searchArtists)(query, {limit: 5});
-        response.artists = artistsResponse.data.body.artists.items;
 
         return response;
     },

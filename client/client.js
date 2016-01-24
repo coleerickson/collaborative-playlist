@@ -8,29 +8,38 @@ Template.navBar.helpers({
     }
 });
 
+function search() {
+    // get query
+    var query = $("#search-box").val();
+    query = $.trim(query);
+
+    // if the query is blank, don't continue
+    if (query === "") {
+        return;
+    }
+
+    // ask the server to retrieve Spotify results for the query
+    Meteor.call('search', query, function (err, result) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log(result);
+            Session.set("searchResults", result);
+        }
+    });
+
+    // clear the search box
+    $("#search-box").val('');
+}
+
 Template.search.events({
     'click #search-button': function(event) {
-        // get query
-        var query = $("#search-box").val();
-        query = $.trim(query);
-
-        // if the query is blank, don't continue
-        if (query === "") {
-            return;
+        search();
+    },
+    'keydown #search-box': function(event) {
+        if (event.keyCode === 13) {
+            search();
         }
-
-        // ask the server to retrieve Spotify results for the query
-        Meteor.call('search', query, function (err, result) {
-            if (err) {
-                console.error(err);
-            } else {
-                console.log(result);
-                Session.set("searchResults", result);
-            }
-        });
-
-        // clear the search box
-        $("#search-box").val('');
     },
     'click .track': function(event) {
         Session.set("spotifyUri", this.uri);

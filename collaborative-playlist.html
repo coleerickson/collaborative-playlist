@@ -46,18 +46,15 @@
 
 
     <h2>Search</h2>
-    <input id="search-box" type="text" />
+    <input id="search-box" type="text" placeholder="Search"/>
     <button id="search-button">Search</button>
 
-    <h2>Tracks</h2>
-    {{#each tracks}}
-        {{> trackSearchResult}}
-    {{/each}}
-
-    <h2>Artists</h2>
-    {{#each artists}}
-        {{> artist}}
-    {{/each}}
+    {{#if tracks}}
+        <h2>Tracks</h2>
+        {{#each tracks}}
+            {{> trackSearchResult}}
+        {{/each}}
+    {{/if}}
 </body>
 </template>
 
