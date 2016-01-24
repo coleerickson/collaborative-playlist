@@ -86,7 +86,15 @@ Meteor.methods({
         var trackResponse = apiWrap(spotifyApi.getTrack)(trackId, {});
 
         var track = trackResponse.data.body;
-        Suggestions.insert(track);
+
+        var suggestion = Suggestions.findOne({ id: trackId });
+        if (suggestion) {
+            Meteor.call('upVote', suggestion._id);
+        } else {
+            Suggestions.insert(track, function(err, id) {
+                Meteor.call('upVote', id);
+            });
+        }
 
         // TODO check for pre-existing suggestion
 
