@@ -37,11 +37,15 @@
 </template>
 
 <template name="about">
+  <h2> How to Use Our Site </h2>
+  <p> At your next event, make your dancefloor more democratic with PartyUp. With PartyUp, one person can't dominate the music choices. And you won't get stuck being DJ instead of enjoying yourself all night.
+     All you have to do is log in with spotify, create an event, give your guests the access code, and they can submit songs and vote.
+     The highest voted songs will be the ones that play!  </p>
+    <h5> Want to get started? </h5>
+  <a href={{pathFor 'create'}}><button class="start"> Get started now" </button> </a>
   <h2> About PartyUp </h2>
   <p>  Welcome to our site! This site was started during Winter Study by 4 Williams College Sophomores </p>
-  <h2> How to Use Our Site </h2>
-  <p> Instructions on how to use our site! </p>
-  <button class="start"> "Get started now" </button>
+
 
 </template>
 
@@ -125,29 +129,14 @@
 
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> More Actions <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-
-            <li><a href={{pathFor 'search'}}>Suggest a Song</a></li>
-            <li><a href={{pathFor 'songQueue'}}>Vote for Songs</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href={{pathFor 'create'}}>Create a New Event</a></li>
-            <li><a href={{pathFor 'join'}}>Join an Existing Event!</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href={{pathFor 'about'}}>More about our site!</a></li>
-          </ul>
-        </li>
-      </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="{{activeFor '/create'}}"><a href="{{pathFor 'create'}}">Create a New Event</a></li>
         <li class="{{activeFor '/join'}}"><a href="{{pathFor 'join'}}">Join an Event</a></li>
         <li class="{{activeFor '/songQueue'}}"><a href="{{pathFor 'songQueue'}}">Song Queue</a></li>
         <li class="{{activeFor '/search'}}"><a href="{{pathFor 'search'}}">Suggest a Song</a></li>
+        <li class="{{activeFor '/about'}}"><a href="{{pathFor 'about'}}">Learn More</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+  <!-- /.container-fluid -->
 </nav>
 </template>
