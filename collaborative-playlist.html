@@ -10,18 +10,39 @@
 </template>
 
 <template name="homePage">
-    <p class="main">This is the create event page.</p>
+    <p class="main"> Get Started Here! </p>
+    <a href = {{pathFor 'create'}}> <button class="createEvent" > Create Event! </button> </a>
+    <a href={{pathFor 'join'}}> <button class="joinEvent"> Join an Event! </button> </a>
+</template>
+
+<template name="create">
+    <p class="main"> Create your own event! </p>
+    <input id="eventName" type="text" placeholder="Name your Event!"/>
+</template>
+
+<template name="join">
+    <p class="main"> Join an existing event! </p>
+    <input id="accessCode" type="text" placeholder="Enter the Access Code"/>
 </template>
 
 <template name="songQueue">
     <body>
-        <h2>Suggestions</h2>
+        <h2>Song Queue</h2>
         <div class=container>
             {{#each suggestions}}
                 {{> trackSuggestion}}
             {{/each}}
         </div>
     </body>
+</template>
+
+<template name="about">
+  <h2> About PartyUp </h2>
+  <p>  Welcome to our site! This site was started during Winter Study by 4 Williams College Sophomores </p>
+  <h2> How to Use Our Site </h2>
+  <p> Instructions on how to use our site! </p>
+  <button class="start"> "Get started now" </button>
+
 </template>
 
 <template name="suggestion">
@@ -113,10 +134,10 @@
             <li><a href={{pathFor 'search'}}>Suggest a Song</a></li>
             <li><a href={{pathFor 'songQueue'}}>Vote for Songs</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Create a New Event</a></li>
-            <li><a href="#">Join an Existing Event!</a></li>
+            <li><a href={{pathFor 'create'}}>Create a New Event</a></li>
+            <li><a href={{pathFor 'join'}}>Join an Existing Event!</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">More about our site!</a></li>
+            <li><a href={{pathFor 'about'}}>More about our site!</a></li>
           </ul>
         </li>
       </ul>
