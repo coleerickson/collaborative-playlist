@@ -1,9 +1,4 @@
-*, h1, h2, h3, h4, h5, h6,
-button,
-input,
-optgroup,
-select,
-textarea {
+*, h1, h2, h3, h4, h5, h6 {
     color: #eee;
     font-family: sans-serif;
 }
@@ -29,7 +24,7 @@ button {
 }
 
 #search-button {
-  color: white
+  color: white;
 }
 
 .track-title {

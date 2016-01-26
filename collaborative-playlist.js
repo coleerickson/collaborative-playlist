@@ -11,6 +11,21 @@ Router.route('/search', function () {
   this.layout('layout');
 });
 
+Router.route('/about', function() {
+  this.render('about');
+  this.layout('layout');
+});
+
+Router.route('/create', function() {
+  this.render('create');
+  this.layout('layout');
+})
+
+Router.route('/join', function() {
+  this.render('join');
+  this.layout('layout');
+})
+
 Router.route('/songQueue', function () {
   this.render('songQueue');
   this.layout('layout');
