@@ -43,8 +43,15 @@ Template.search.events({
     },
     'click .track': function(event) {
         Session.set("spotifyUri", this.uri);
-        Meteor.call('suggest', this.id);
-        console.log(this);
+        Meteor.call('suggest', this.id, function (err, success) {
+            if (err) {
+                console.error(err);
+            } else {
+                if (success) {
+                    Router.go('/songQueue');
+                }
+            }
+        });
     }
 });
 
