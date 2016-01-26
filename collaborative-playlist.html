@@ -27,7 +27,7 @@
 
 <template name="songQueue">
     <body>
-        <h2>Song Queue</h2>
+        <h2 class="queue">Song Queue</h2>
         <div class=container>
             {{#each suggestions}}
                 {{> trackSuggestion}}
@@ -56,8 +56,7 @@
 </template>
 
 <template name="search">
-<body>
-    {{> loginButtons}}
+<body class="songs">
 
     {{#if spotifyUri}}
         <div id="spotify-play-button">
@@ -66,7 +65,7 @@
     {{/if}}
 
 
-    <h2>Search</h2>
+    <h2 id="search">Search</h2>
     <input id="search-box" type="text" placeholder="Search"/>
     <button id="search-button"><i class="fa fa-search fa-lg"></i></button>
 

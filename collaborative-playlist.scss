@@ -82,6 +82,26 @@ button {
     overflow: hidden;
 }
 
+.queue {
+  font-size: 44px;
+  font-family: inherit;
+  margin-left: 8%;
+}
+
+.songs {
+  width: 50%;
+  margin-left: 5%;
+}
+
+#search {
+  font-size: 44px;
+  font-family: inherit;
+  font-stretch: expanded;
+}
+
+#search-box {
+  color: white;
+}
 
 /* navbar styling http://stackoverflow.com/a/18529465 */
 $bgDefault      : #70008b;
