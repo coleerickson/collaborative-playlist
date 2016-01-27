@@ -21,10 +21,6 @@ input:focus {
 
 }
 
-.aboutpage {
-  padding: 20px;
-  padding-top: 5px;
-}
 button {
     outline: 0;
     background: none;
@@ -110,6 +106,8 @@ button {
 .container {
   margin-left: 5% !important;
   margin-right: 5% !important;
+  padding: 20px;
+  padding-top: 5px;
 }
 
 /* navbar styling http://stackoverflow.com/a/18529465 */
