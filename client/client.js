@@ -10,6 +10,36 @@ Template.layout.helpers({
     }
 });
 
+function joinParty(partyCode) {
+    console.log('party code entered by user: ' + partyCode);
+    var party = Parties.findOne({identifier: partyCode});
+
+    if (party) {
+        console.log('found party');
+        $(event.target).val('');
+        Session.set('party', party);
+        Router.go('/songQueue');
+    } else {
+        console.log('no such party found');
+    }
+}
+
+function mainPageJoinPartyEventHandler(event) {
+    var field = $("#access-code");
+    var code = field.val();
+    field.val('');
+    joinParty(code);
+}
+
+Template.joinParty.events({
+    "click #join-button": mainPageJoinPartyEventHandler,
+    "keydown #access-code": function (event) {
+        if (event.keyCode === 13) {
+            mainPageJoinPartyEventHandler(event);
+        }
+    }
+});
+
 Template.navBar.helpers({
     activeFor: function (other) {
         if (Router.current().route.path() === other) {

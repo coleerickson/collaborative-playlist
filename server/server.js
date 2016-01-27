@@ -19,15 +19,17 @@ function apiWrap(f) {
 
                 // refresh token
                 var spotifyApi = new SpotifyWebApi();
-                spotifyApi.refreshAndUpdateAccessToken(function (err, response) {
-                    if (err) {
-                        console.log("failed to refresh");
-                        console.log(err);
-                    } else {
-                        console.log("succeeded refresh");
-                        console.log(response);
-                    }
-                });
+                spotifyApi.refreshAndUpdateAccessToken();
+
+                // function (err, response) {
+                //     if (err) {
+                //         console.log("failed to refresh");
+                //         console.log(err);
+                //     } else {
+                //         console.log("succeeded refresh");
+                //         console.log(response);
+                //     }
+                // }
 
                 // recursive retry
 
