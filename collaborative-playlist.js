@@ -2,8 +2,18 @@ Suggestions = new Mongo.Collection("suggestions");
 Votes = new Mongo.Collection("votes");
 
 Router.route('/', function () {
-  this.render('homePage');
-  this.layout('layout');
+  this.render('main-menu');
+  this.layout('homeLayout');
+});
+
+Router.onBeforeAction(function () {
+    if (!Meteor.userId() && !Meteor.loggingIn()) {
+        this.render('login');
+        this.layout('homeLayout')
+    } else {
+        // required by Iron to process the route handler
+        this.next();
+    }
 });
 
 Router.route('/search', function () {
@@ -29,6 +39,21 @@ Router.route('/join', function() {
 Router.route('/songQueue', function () {
   this.render('songQueue');
   this.layout('layout');
+});
+
+Router.route('/createParty', function () {
+  this.render('createParty');
+  this.layout('homeLayout');
+});
+
+Router.route('/joinParty', function () {
+  this.render('joinParty');
+  this.layout('homeLayout');
+});
+
+// catchall route
+Router.route('/(.*)', function () {
+    this.redirect('/');
 });
 
 if (Meteor.isServer) {
@@ -171,4 +196,4 @@ Meteor.methods({
             $set: { score: sum }
         });
     }
-});
+})

@@ -1,6 +1,38 @@
 <head>
-    <title>collaborative-playlist</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>collaborative-playlist</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/landing-page.css" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
 </head>
+<body>
+  <!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+</body>
 
 <template name="layout">
 <body>
@@ -8,6 +40,76 @@
   {{> yield}}
 </body>
 </template>
+
+<template name="homeLayout">
+  <a name="about"></a>
+<div class="intro-header">
+  <div class="container">
+
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="intro-message">
+                  <h1>Party Up</h1>
+                  <h3>An interactive, collaborative DJ for your night out</h3>
+                  <hr class="intro-divider">
+                  <ul class="list-inline intro-social-buttons">
+                      {{>yield}}
+                  </ul>
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
+</template>
+
+<template name="login">
+  <li>
+  {{>loginButtons}}
+</li>
+</template>
+
+<template name="main-menu">
+
+                      <li>
+                          <a href="{{pathFor route='createParty'}}" class="btn btn-default btn-lg">Create Party</a>
+                      </li>
+                      <li>
+                          <a href="{{pathFor route='joinParty'}}" class="btn btn-default btn-lg">Join Party</a>
+                      </li>
+                      <hr class="intro-divider">
+
+                      <p>{{>loginButtons}}</p>
+</template>
+
+<template name="createParty">
+                    <li>
+                      <input type="text" id="host-name" name="hostName" placeholder="enter your name">
+                    </li>
+                      <li>
+                          <button type="submit" class="btn btn-default btn-lg" role="button">Create</button>
+                      </li>
+                      <li>
+                          <a href="{{pathFor route='/'}}" class="btn btn-default btn-lg">Back</a>
+                      </li>
+                      <hr class="intro-divider">
+                      {{>loginButtons}}
+</template>
+
+<template name="joinParty">
+
+                    <li>
+                      <input autocorrect="off" autocapitalize="off" type="text" id="access-code" name="accessCode" placeholder="enter an access code">
+                    </li>
+                      <li>
+                          <button type="submit" class="btn btn-default btn-lg" role="button">Join</button>
+                      </li>
+                      <li>
+                          <a href="{{pathFor route='homePage'}}" class="btn btn-default btn-lg">Back</a>
+                      </li>
+                      <hr class="intro-divider">
+                      {{>loginButtons}}
+                    </template>
 
 <template name="homePage">
     <p class="main"> Get Started Here! </p>
