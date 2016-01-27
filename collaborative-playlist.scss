@@ -85,11 +85,6 @@ button {
     overflow: hidden;
 }
 
-.about {
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
 .songs {
   margin-left: 5%;
 }
@@ -103,6 +98,14 @@ button {
   font-family: inherit;
 }
 
+.queue {
+  margin-left: 8%;
+}
+
+.container {
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+}
 
 /* navbar styling http://stackoverflow.com/a/18529465 */
 $bgDefault      : #70008b;
