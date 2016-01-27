@@ -43,7 +43,12 @@ Template.search.events({
     },
     'click .track': function(event) {
         Session.set("spotifyUri", this.uri);
-        Meteor.call('suggest', this.id, function (err, success) {
+
+        if (!Session.get('party')) {
+            return;
+        }
+
+        Meteor.call('suggest', this.id, Session.get('party')._id, function (err, success) {
             if (err) {
                 console.error(err);
             } else {
@@ -57,7 +62,7 @@ Template.search.events({
 
 Template.search.helpers({
     suggestions: function () {
-        return Suggestions.find({});
+        return Suggestions.find();
     },
 
     artists: function() {
@@ -108,7 +113,7 @@ Template.trackContents.helpers({
 
 Template.songQueue.helpers({
       suggestions: function () {
-          return Suggestions.find({}, {sort: {score: -1}}) || {};
+          return Suggestions.find({partyId: Session.get('party')._id}, {sort: {score: -1}}) || {};
       },
       artist: function() {
           return this.artists.map(function (artist) {
@@ -121,10 +126,49 @@ Template.songQueue.helpers({
 });
 
 Template.trackSuggestion.events({
-    "click .votes .up": function () {
+    "click .votes .up": function (event) {
         Meteor.call("upVote", this._id);
     },
-    "click .votes .down": function () {
+    "click .votes .down": function (event) {
         Meteor.call("downVote", this._id);
     }
 });
+
+Template.create.events({
+    "click #event-create": function (event) {
+        console.log("Creating new party -- on client");
+        Meteor.call("newParty", function (err, response) {
+            console.log("Got new party response");
+            if (err) {
+                console.error(err);
+            } else {
+                if (response) {
+                    $("#event-create-response").text('New event created! Share this ID with your friends: ' + response);
+                    Session.set('party', Parties.findOne({identifier: response}));
+                } else {
+                    $("#event-create-response").text('Creation failed. You need to sign in to create an event.');
+                }
+            }
+        });
+    }
+});
+
+Template.join.events({
+    'keydown #accessCode': function (event) {
+        if (event.keyCode === 13) {
+            console.log('pressed enter in access code');
+            var partyCode = $(event.target).val();
+            console.log('party code entered by user: ' + partyCode);
+            var party = Parties.findOne({identifier: partyCode});
+
+            if (party) {
+                console.log('found party');
+                $(event.target).val('');
+                Session.set('party', party);
+                Router.go('/songQueue');
+            } else {
+                console.log('no such party found');
+            }
+        }
+    }
+})
