@@ -1,9 +1,4 @@
-*, h1, h2, h3, h4, h5, h6,
-button,
-input,
-optgroup,
-select,
-textarea {
+*, h1, h2, h3, h4, h5, h6 {
     color: #eee;
     font-family: sans-serif;
 }
@@ -22,10 +17,17 @@ input:focus {
     outline: none;
 }
 
+.loginbutton {
+
+}
 button {
     outline: 0;
     background: none;
     border: 0;
+}
+
+#search-button {
+  color: white;
 }
 
 .track-title {

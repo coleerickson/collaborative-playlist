@@ -21,6 +21,21 @@ Router.route('/search', function () {
   this.layout('layout');
 });
 
+Router.route('/about', function() {
+  this.render('about');
+  this.layout('layout');
+});
+
+Router.route('/create', function() {
+  this.render('create');
+  this.layout('layout');
+})
+
+Router.route('/join', function() {
+  this.render('join');
+  this.layout('layout');
+})
+
 Router.route('/songQueue', function () {
   this.render('songQueue');
   this.layout('layout');
@@ -69,6 +84,8 @@ function apiWrap(f) {
             // if we need to refresh the access token, do so and then try again
             if (response.error.statusCode === 401) {
                 console.log("API call failed because we need a new access token. Refreshing token...");
+                console.log(response.error);
+
                 // refresh token
                 var spotifyApi = new SpotifyWebApi();
                 spotifyApi.refreshAndUpdateAccessToken(function (err, response) {
@@ -115,10 +132,12 @@ Meteor.methods({
         var suggestion = Suggestions.findOne({ id: trackId });
         if (suggestion) {
             Meteor.call('upVote', suggestion._id);
+            return false;
         } else {
             Suggestions.insert(track, function(err, id) {
                 Meteor.call('upVote', id);
             });
+            return true;
         }
 
         // TODO check for pre-existing suggestion
