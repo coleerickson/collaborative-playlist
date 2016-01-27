@@ -85,6 +85,24 @@ button {
     overflow: hidden;
 }
 
+.about {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.songs {
+  margin-left: 5%;
+}
+
+#search-box {
+  color: white;
+}
+
+#search {
+  font-size: 44px;
+  font-family: inherit;
+}
+
 
 /* navbar styling http://stackoverflow.com/a/18529465 */
 $bgDefault      : #70008b;
