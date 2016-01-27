@@ -1,3 +1,15 @@
+Template.layout.helpers({
+    partyId: function () {
+        var party = Session.get('party');
+
+        if (party) {
+            return party.identifier;
+        } else {
+            return null;
+        }
+    }
+});
+
 Template.navBar.helpers({
     activeFor: function (other) {
         if (Router.current().route.path() === other) {
@@ -31,6 +43,23 @@ function search() {
     // clear the search box
     $("#search-box").val('');
 }
+
+Template.mainMenu.events({
+    "click #create-party-button": function (event) {
+        console.log("create party clicked");
+        Meteor.call("newParty", function (err, response) {
+            console.log("Got new party response");
+            if (err) {
+                console.error(err);
+            } else {
+                if (response) {
+                    Session.set('party', Parties.findOne({identifier: response}));
+                    Router.go('/search');
+                }
+            }
+        });
+    }
+});
 
 Template.search.events({
     'click #search-button': function(event) {

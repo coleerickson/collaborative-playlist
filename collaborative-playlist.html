@@ -25,20 +25,11 @@
   <![endif]-->
 
 </head>
-<body>
-  <!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-</body>
 
 <template name="layout">
-<body>
-  {{> navBar}}
-  {{> yield}}
-</body>
+    {{> navBar}}
+    <div class="partyId">{{partyId}}</div>
+    {{> yield}}
 </template>
 
 <template name="homeLayout">
@@ -69,10 +60,10 @@
 </li>
 </template>
 
-<template name="main-menu">
+<template name="mainMenu">
 
                       <li>
-                          <a href="{{pathFor route='createParty'}}" class="btn btn-default btn-lg">Create Party</a>
+                          <button id="create-party-button" class="btn btn-default btn-lg">Create Party</button>
                       </li>
                       <li>
                           <a href="{{pathFor route='joinParty'}}" class="btn btn-default btn-lg">Join Party</a>
@@ -128,14 +119,12 @@
 </template>
 
 <template name="songQueue">
-    <body>
         <h2 class="queue">Song Queue</h2>
         <div class=container>
             {{#each suggestions}}
                 {{> trackSuggestion}}
             {{/each}}
         </div>
-    </body>
 </template>
 
 <template name="about">
@@ -163,7 +152,6 @@
 </template>
 
 <template name="search">
-<body class="songs">
 
     {{#if spotifyUri}}
         <div id="spotify-play-button">
@@ -181,8 +169,7 @@
         {{#each tracks}}
             {{> trackSearchResult}}
         {{/each}}
-    {{/if}}
-</body>
+    {{/if}}]
 </template>
 
 <template name="trackSuggestion">
