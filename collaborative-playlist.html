@@ -1,6 +1,38 @@
 <head>
-    <title>collaborative-playlist</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>collaborative-playlist</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/landing-page.css" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
 </head>
+<body>
+  <!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+</body>
 
 <template name="layout">
 <body>
@@ -8,6 +40,76 @@
   {{> yield}}
 </body>
 </template>
+
+<template name="homeLayout">
+  <a name="about"></a>
+<div class="intro-header">
+  <div class="container">
+
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="intro-message">
+                  <h1>Party Up</h1>
+                  <h3>An interactive, collaborative DJ for your night out</h3>
+                  <hr class="intro-divider">
+                  <ul class="list-inline intro-social-buttons">
+                      {{>yield}}
+                  </ul>
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
+</template>
+
+<template name="login">
+  <li>
+  {{>loginButtons}}
+</li>
+</template>
+
+<template name="main-menu">
+
+                      <li>
+                          <a href="{{pathFor route='createParty'}}" class="btn btn-default btn-lg">Create Party</a>
+                      </li>
+                      <li>
+                          <a href="{{pathFor route='joinParty'}}" class="btn btn-default btn-lg">Join Party</a>
+                      </li>
+                      <hr class="intro-divider">
+
+                      <p>{{>loginButtons}}</p>
+</template>
+
+<template name="createParty">
+                    <li>
+                      <input type="text" id="host-name" name="hostName" placeholder="enter your name">
+                    </li>
+                      <li>
+                          <button type="submit" class="btn btn-default btn-lg" role="button">Create</button>
+                      </li>
+                      <li>
+                          <a href="{{pathFor route='/'}}" class="btn btn-default btn-lg">Back</a>
+                      </li>
+                      <hr class="intro-divider">
+                      {{>loginButtons}}
+</template>
+
+<template name="joinParty">
+
+                    <li>
+                      <input autocorrect="off" autocapitalize="off" type="text" id="access-code" name="accessCode" placeholder="enter an access code">
+                    </li>
+                      <li>
+                          <button type="submit" class="btn btn-default btn-lg" role="button">Join</button>
+                      </li>
+                      <li>
+                          <a href="{{pathFor route='homePage'}}" class="btn btn-default btn-lg">Back</a>
+                      </li>
+                      <hr class="intro-divider">
+                      {{>loginButtons}}
+                    </template>
 
 <template name="homePage">
     <p class="main"> Get Started Here! </p>
@@ -28,7 +130,7 @@
 
 <template name="songQueue">
     <body>
-        <h2>Song Queue</h2>
+        <h2 class="queue">Song Queue</h2>
         <div class=container>
             {{#each suggestions}}
                 {{> trackSuggestion}}
@@ -38,11 +140,16 @@
 </template>
 
 <template name="about">
+  <h2> Make your dancefloor more democratic with PartyUp </h2>
+  <p> Are you hosting a party? Don't get stuck being a DJ all night while you could be having fun! And don't let one person's music choices dominate the night.
+    With PartyUp, guests can submit song suggestions and then vote on which songs they would like to be played. The songs with the most votes are the ones that will play. All you have to do is log in with spotify and <a href = {{pathFor 'create'}}> Create an Event</a>.
+    Then, share your access code with your party guests. Once they log in with spotify and provide the access code, guests can submit suggestions and vote to hear their favorite songs.  </p>
+    <h5> Want to get started? </h5>
+  <a href={{pathFor 'create'}}><button type="button" class="btn btn-success"> Party Hosts: Start Here </button> </a>
+  <a href={{pathFor 'join'}}><button type="button" class="btn btn-success"> Party Guests: Start Here </button> </a>
   <h2> About PartyUp </h2>
-  <p>  Welcome to our site! This site was started during Winter Study by 4 Williams College Sophomores </p>
-  <h2> How to Use Our Site </h2>
-  <p> Instructions on how to use our site! </p>
-  <button class="start"> "Get started now" </button>
+  <p>  PartyUp was started in January 2016 at Williams College by four sophomores: Cole Erikson, Joyce Wang, Anna Neufeld, and Helene Hall. The site was created for a winter study course: Web and Application Development in Meteor. </p>
+
 
 </template>
 
@@ -57,8 +164,7 @@
 </template>
 
 <template name="search">
-<body>
-    {{> loginButtons}}
+<body class="songs">
 
     {{#if spotifyUri}}
         <div id="spotify-play-button">
@@ -67,7 +173,7 @@
     {{/if}}
 
 
-    <h2>Search</h2>
+    <h2 id="search">Search</h2>
     <input id="search-box" type="text" placeholder="Search"/>
     <button id="search-button"><i class="fa fa-search fa-lg"></i></button>
 
@@ -126,27 +232,14 @@
 
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> More Actions <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-
-            <li><a href={{pathFor 'search'}}>Suggest a Song</a></li>
-            <li><a href={{pathFor 'songQueue'}}>Vote for Songs</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href={{pathFor 'create'}}>Create a New Event</a></li>
-            <li><a href={{pathFor 'join'}}>Join an Existing Event!</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href={{pathFor 'about'}}>More about our site!</a></li>
-          </ul>
-        </li>
-      </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li class="{{activeFor '/create'}}"><a href="{{pathFor 'create'}}">Create a New Event</a></li>
+        <li class="{{activeFor '/join'}}"><a href="{{pathFor 'join'}}">Join an Event</a></li>
         <li class="{{activeFor '/songQueue'}}"><a href="{{pathFor 'songQueue'}}">Song Queue</a></li>
         <li class="{{activeFor '/search'}}"><a href="{{pathFor 'search'}}">Suggest a Song</a></li>
+        <li class="{{activeFor '/about'}}"><a href="{{pathFor 'about'}}">Learn More</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+  <!-- /.container-fluid -->
 </nav>
 </template>
