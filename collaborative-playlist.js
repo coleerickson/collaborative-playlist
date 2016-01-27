@@ -3,7 +3,7 @@ Votes = new Mongo.Collection("votes");
 Parties = new Mongo.Collection("parties");
 
 Router.route('/', function () {
-  this.render('main-menu');
+  this.render('mainMenu');
   this.layout('homeLayout');
 });
 
