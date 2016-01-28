@@ -143,25 +143,7 @@
 
 </template>
 
-<template name="suggestion">
-  <div class=row>
-    <div class=col-lg-3> <strong> {{name}} </strong> </div>
-    <div class=col-lg-3> <strong> {{artist}} </strong> </div>
-     <div class=col-xs-1> <button class="like"> <span class="glyphicon glyphicon-chevron-up"></span> </button> </div>
-      <div class=col-xs-1> <strong> {{score}} </strong> </div>
-       <div class=col-xs-1> <button class="dislike"> <span class="glyphicon glyphicon-chevron-down"></span>  </button> </div>
-     </div>
-</template>
-
 <template name="search">
-
-    {{#if spotifyUri}}
-        <div id="spotify-play-button">
-            <iframe src="https://embed.spotify.com/?uri={{spotifyUri}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-        </div>
-    {{/if}}
-
-
     <h2 id="search">Search</h2>
     <input id="search-box" type="text" placeholder="Search"/>
     <button id="search-button"><i class="fa fa-search fa-lg"></i></button>
@@ -192,10 +174,16 @@
 </template>
 
 <template name="trackContents">
-    <div class="track-title">{{name}}</div>
-    <div class="track-details">
-        <span class="track-artist">{{artist}}</span> <span class="track-album">- {{album}}</span>
+    <div class="track-left">
+        <div class="track-title">{{name}}</div>
+        <div class="track-details">
+            <span class="track-artist">{{artist}}</span> <span class="track-album">- {{album}}</span>
+        </div>
     </div>
+    <div class="track-play">
+        <iframe src="https://embed.spotify.com/?uri={{uri}}" width="250" height="80" frameborder="0" allowtransparency="true"></iframe>
+    </div>
+    <div class="clear"></div>
 </template>
 
 <template name="artist">

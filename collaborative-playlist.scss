@@ -59,6 +59,18 @@ button {
     color: #aaa;
 }
 
+.track-left {
+    float:left;
+}
+
+.track-play {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
 .music-item:not(:first-child) {
     margin-top: 10px;
 }
