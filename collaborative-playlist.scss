@@ -14,7 +14,7 @@ input {
 }
 
 .partyId {
-  margin-left: 10px;
+  margin-left: 11px;
 }
 
 input:focus {
@@ -35,6 +35,10 @@ button {
   color: white;
 }
 
+#event-create {
+  margin-left: 20px;
+}
+
 .track-title {
     font-weight: bold;
 }
@@ -46,6 +50,22 @@ button {
 
 .music-item:not(:first-child) {
     margin-top: 10px;
+}
+
+#search {
+  margin-left: 20px;
+}
+
+#search-box {
+  margin-left: 20px;
+}
+
+#accessCode {
+  margin-left: 20px;
+}
+
+.main {
+  margin-left: 20px;
 }
 
 .music-item {
