@@ -32,9 +32,9 @@ function apiWrap(f) {
                 // }
 
                 // recursive retry
-
-                console.log('retrying');
-                return wrapped.apply(null, arguments);
+                //
+                // console.log('retrying');
+                // return wrapped.apply(null, arguments);
             } else {
                 // unknown error
                 console.error("Failed. " + response.error);

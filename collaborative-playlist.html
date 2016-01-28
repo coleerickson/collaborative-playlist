@@ -28,14 +28,15 @@
 
 <template name="layout">
     {{> navBar}}
-    <div class="partyId">{{partyId}}</div>
-    {{> yield}}
+    <div class="container">
+        <div class="partyId"><p style="font-style:italic!important;font-size:12px!important;font-weight:normal!important">Access Code</p>{{partyId}}</div>
+        {{> yield}}
+    </div>
 </template>
 
 <template name="homeLayout">
   <a name="about"></a>
 <div class="intro-header">
-  <div class="container">
 
       <div class="row">
           <div class="col-lg-12">
@@ -51,7 +52,6 @@
       </div>
 
   </div>
-</div>
 </template>
 
 <template name="login">
@@ -171,7 +171,7 @@
         {{#each tracks}}
             {{> trackSearchResult}}
         {{/each}}
-    {{/if}}]
+    {{/if}}
 </template>
 
 <template name="trackSuggestion">
